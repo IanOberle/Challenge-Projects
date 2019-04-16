@@ -7,3 +7,5 @@ Projects from Open Katiss that I have either completed or attempted
 Next Task: Go through files and add in comments. Codes are relatively small and fairly easy to navigate, but for the sake of standards, I'm going to add comments.
 
 (4/11/2019) Added more projects that I completed on the specified date.
+
+(4/16/2019) Changed repository name to add some level protection/prevention (repository cannot be searched under Open Kattis tag) from others using my codes to complete Open Kattis projects.
