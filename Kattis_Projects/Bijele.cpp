@@ -21,8 +21,10 @@ int main()
     int king, queen, rook, bishop, knight, pawn;
     int kingdif, queendif, rookdif, bishopdif, knightdif, pawndif;
 
+    //Enter counts for each chess piece
     cin >> king >> queen >> rook >> bishop >> knight >> pawn;
 
+    //Find the number of pieces that need to be added or removed for each piece
     if (king != 1)
         kingdif = 1 - king;
     else
@@ -47,6 +49,7 @@ int main()
         pawndif = 8 - pawn;
     else
         pawndif = 0;
+    //Display results
     cout << kingdif << " " << queendif << " " << rookdif << " " << bishopdif << " " << knightdif << " " << pawndif;
     return 0;
 }
