@@ -1,9 +1,17 @@
-Above Average - Open Katiss
+/*Kattis Project Description
+Input
+The first line of standard input contains an integer 1≤C≤50, the number of test cases. 
+C data sets follow. Each data set begins with an integer, N, the number of people in the class (1≤N≤1000). 
+N integers follow, separated by spaces or newlines, each giving the final grade (an integer between 0 and 100)
+of a student in the class.
+
+Output
+For each case you are to output a line giving the percentage of students whose grade 
+is above average, rounded to exactly 3 decimal places.
+*/
 
 #include <iostream>
 #include <iomanip>
-#include <ctime>
-#include <cstdlib>
 
 using namespace std;
 
@@ -14,75 +22,68 @@ int main()
 	int * group = nullptr;
 	float * conclusion = nullptr;
 
-	srand(time(0));
-
-	//numberOfGroups = int((rand() % 49) + 1);
-	//cout << "Number of Groups: " << numberOfGroups << endl;
+	//Enter number of test groups
 	cin >> numberOfGroups;
 	conclusion = new float[numberOfGroups];
-	try
+	
+	//Find the test average for each group
+	for (int i = 0; i < numberOfGroups; i++)
 	{
-		for (int i = 0; i < numberOfGroups; i++)
+		sum = 0;
+		cin >> groupsize;
+		
+		//Quit program and delete pointers if invalid size is entered
+		if (groupsize < 0)
 		{
-			sum = 0;
-			//groupsize = int(rand() % 1000);
-			//cout <<"Group: " << i << " Group Size: " << groupsize << endl;
-			cin >> groupsize;
-			if (groupsize < 0)
-			{
-				cout << "Exiting\n";
-				delete[] group;
-				delete[] conclusion;
-				group = nullptr;
-				conclusion = nullptr;
-				system("pause");
-				exit(0);
-			}
-			group = new int[groupsize];
-			
-			for (int j = 0; j < groupsize; j++)
-			{
-				/*group[j] = int(rand() % 100);
-				if (j % 35 == 0)
-					cout << "\n"; 
-				cout << setw(3) << right << group[j];*/
-				cin >> group[j];
-				sum += group[j];
-			}
-			cout << endl << endl;
-			groupAverage = float(sum) / groupsize;
-			
-			groupAboveAverageCount = 0;
-			for (int j = 0; j < groupsize; j++)
-			{
-				if (group[j] > groupAverage)
-				{
-					groupAboveAverageCount++;
-				}
-			}
-			conclusion[i] = float(groupAboveAverageCount) / groupsize;
+			cout << "Exiting\n";
 			delete[] group;
+			delete[] conclusion;
 			group = nullptr;
+			conclusion = nullptr;
+			system("pause");
+			exit(0);
 		}
-		cout << endl;
-		for (int i = 0; i < numberOfGroups; i++)
+		
+		group = new int[groupsize];
+			
+		//Create group total
+		for (int j = 0; j < groupsize; j++)
 		{
-			cout << fixed << setprecision(3) << conclusion[i] * 100 << "%" << endl;
-			//cout << fixed << setprecision(3) << "Conclusion " << i << ": " << conclusion[i] * 100 << "%" << endl;
+			cin >> group[j];
+			sum += group[j];
 		}
+		cout << endl << endl;
 		
-		delete[] conclusion;
-		conclusion = nullptr;
+		//Find group average
+		groupAverage = float(sum) / groupsize;
+			
+		//Find number of students above average
+		groupAboveAverageCount = 0;
+		for (int j = 0; j < groupsize; j++)
+		{
+			if (group[j] > groupAverage)
+			{
+				groupAboveAverageCount++;
+			}
+		}
+		//Percentage of students above average
+		conclusion[i] = float(groupAboveAverageCount) / groupsize;
 		
-	}
-	catch (int e)
-	{
-		cout << "An error has occured" << endl;
-		cout << e << endl;
+		//Reset for next group
 		delete[] group;
-		delete[] conclusion;
+		group = nullptr;
 	}
-
-	system("pause");
+	
+	//Display final conclusions
+	cout << endl;
+	for (int i = 0; i < numberOfGroups; i++)
+	{
+		cout << fixed << setprecision(3) << conclusion[i] * 100 << "%" << endl;
+	}
+		
+	//Delete final pointer and set to null
+	delete[] conclusion;
+	conclusion = nullptr;
+		
 	return 0;
 }
